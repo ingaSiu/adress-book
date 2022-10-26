@@ -6,7 +6,7 @@
         display: flex;
         gap: 20px;
         padding: 20px;
-
+      
         button{
             height: 30px;
             text-align: center;
@@ -30,7 +30,9 @@
         .input-form{
             border: 1px solid violet;
             width: 15%;
+            height: 250px;
             border-radius: 5px;
+            display: none;
             form{
                 display: flex;
                 flex-direction: column;

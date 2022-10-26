@@ -31,7 +31,9 @@
 .wrapper .card-container .input-form {
   border: 1px solid violet;
   width: 15%;
+  height: 250px;
   border-radius: 5px;
+  display: none;
 }
 .wrapper .card-container .input-form form {
   display: flex;
