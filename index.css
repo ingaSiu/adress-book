@@ -1,0 +1,44 @@
+.wrapper {
+  background-color: rgb(166, 233, 211);
+  display: flex;
+  flex-direction: column;
+}
+.wrapper .menu {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+.wrapper .menu button {
+  height: 30px;
+  text-align: center;
+}
+.wrapper .search-input {
+  border: 1px solid black;
+  height: 100px;
+  width: 200px;
+  display: none;
+}
+.wrapper .search-input input {
+  height: 50px;
+}
+.wrapper .search-input button {
+  height: 30px;
+}
+.wrapper .card-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+.wrapper .card-container .input-form {
+  border: 1px solid violet;
+  width: 15%;
+  border-radius: 5px;
+}
+.wrapper .card-container .input-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+}
+.wrapper .card-container .card {
+  border: 1px solid black;
+}/*# sourceMappingURL=index.css.map */

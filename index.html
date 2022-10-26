@@ -9,6 +9,59 @@
     <title>Document</title>
 </head>
 <body>
-    
+<div class="wrapper">
+    <div class="menu">
+        <button type="submit" id="add-new">Create a New Contact</button>
+        <button type="submit" id="clear-all">Clear all Contacts</button>
+        <button type="submit" id="clear-selected">Clear selected Contacts</button>
+        <button type="submit" id="search-contatcs">Search Contacts</button>
+        <button type="submit" id="favorites">Add/remove from favorites</button>
+    </div>
+    <div class="search-input">
+        <form>
+            <input type="search" id="search" name="search">
+            <button type="submit" id="btn-search">OK</button>
+        </form>
+    </div>
+    <div class= "card-container">
+        <div class="input-form">
+            <form>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone-num" name="phone-num">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email">
+                <label for="home-address">Home Adress</label>
+                <input type="text" id="home-address" name="home-address">
+                <button type="submit" id="btn-add">Add</button>
+            </form>
+        </div>
+
+        <div class="contact-list">
+            <h2>Your contact list</h2>
+            <div class="card">
+                <p>Name:</p>
+                <p>Phone:</p>
+                <p>Email:</p>
+                <p>Home Adress</p>
+                <button type="submit" id="btn-delete">Del</button>
+            </div>
+        </div>
+
+        <div class="favorite-list">
+            <h2>Your favourite contact list</h2>
+            <div class="card">
+                <p>Name:</p>
+                <p>Phone:</p>
+                <p>Email:</p>
+                <p>Home Adress</p>
+                <button type="submit" id="btn-delete-fav">Del</button>
+            </div>
+        </div>
+    </div>
+
+
+</div> 
 </body>
 </html>
