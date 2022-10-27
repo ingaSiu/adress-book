@@ -5,9 +5,10 @@ const btnDeleteAll = document.querySelector('#clear-all');
 const btnSearch = document.querySelector('#search-contatcs');
 const searchBox = document.querySelector('.search-input');
 const searchForm = document.querySelector('#search-form');
+const searchContainer = document.querySelector('#search-container');
 
 let contactArr = [];
-
+let searchArr = [];
 
 if(localStorage.getItem('Contact')) {
     contactArr = JSON.parse(localStorage.getItem('Contact'));
@@ -19,20 +20,58 @@ btnNew.addEventListener(('click'), () => {
 })
 
 
-btnSearch.addEventListener(('click'), (event) => {
+btnSearch.addEventListener(('click'), () => {
     if(searchBox.style.display === 'block'){
         searchBox.style.display = 'none';
     } else {
         searchBox.style.display = 'block';
-   
     }
-   
 })
 
-// searchForm.addEventListener(('submit'), () => {
-    
-// })
+searchForm.addEventListener(('submit'), (event) => {
+    event.preventDefault();
+    const searchValue = event.target.elements.search.value.toLowerCase();
+    if(searchValue) {
+        searchArr = contactArr.filter((contact) => {
+            if(
+                contact.name.toLowerCase().includes(searchValue)  
+                || contact.phone.toLowerCase().includes(searchValue)
+                || contact.email.toLowerCase().includes(searchValue)
+                || contact.address.toLowerCase().includes(searchValue)
+            ) {
+                return true;
+            }
+        }); 
+    }
+ 
+    console.log(searchArr);
+    renderSearch(searchArr);
+})
 
+const renderSearch = (searchArr) => {
+    searchContainer.innerHTML = '';
+    searchArr.forEach((contact) => {
+        const cardDiv = document.createElement('div');
+        cardDiv.setAttribute("class", "card");
+        const p1 = document.createElement('p');
+        const p2 = document.createElement('p');
+        const p3 = document.createElement('p');
+        const p4 = document.createElement('p');
+    
+        p1.textContent = `Name: ${contact.name}`;
+        p2.textContent = `Phone number: ${contact.phone}`;
+        p3.textContent = `Email: ${contact.email}`;
+        p4.textContent = `Home Address: ${contact.address}`;
+
+        cardDiv.append(p1);
+        cardDiv.append(p2);
+        cardDiv.append(p3);
+        cardDiv.append(p4);
+        
+        searchContainer.append(cardDiv);
+
+    });
+}
 
 const render = (contactArr) => {
     const contactList = document.querySelector('#contact-list');
