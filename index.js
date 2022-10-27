@@ -2,6 +2,9 @@ const btnNew = document.querySelector('#add-new');
 const form = document.querySelector('#contact-form');
 const inputForm = document.querySelector('.input-form');
 const btnDeleteAll = document.querySelector('#clear-all');
+const btnSearch = document.querySelector('#search-contatcs');
+const searchBox = document.querySelector('.search-input');
+const searchForm = document.querySelector('#search-form');
 
 let contactArr = [];
 
@@ -12,19 +15,44 @@ if(localStorage.getItem('Contact')) {
 
 btnNew.addEventListener(('click'), () => {
     inputForm.style.display = 'block';
+
 })
+
+
+btnSearch.addEventListener(('click'), (event) => {
+    if(searchBox.style.display === 'block'){
+        searchBox.style.display = 'none';
+    } else {
+        searchBox.style.display = 'block';
+   
+    }
+   
+})
+
+// searchForm.addEventListener(('submit'), () => {
+    
+// })
+
 
 const render = (contactArr) => {
     const contactList = document.querySelector('#contact-list');
-    contactArr.forEach((contact) => {
+    contactArr.forEach((contact, index) => {
         const cardDiv = document.createElement('div');
         cardDiv.setAttribute("class", "card");
         const p1 = document.createElement('p');
         const p2 = document.createElement('p');
         const p3 = document.createElement('p');
         const p4 = document.createElement('p');
-        const btn = document.createElement('button');
-        btn.textContent = 'Delete';
+        const btnDel = document.createElement('button');
+        btnDel.textContent = 'Delete';
+        btnDel.value = index;
+        btnDel.addEventListener('click', (event) => {
+            contactArr.splice(event.target.value, 1);
+            localStorage.setItem('Contact', JSON.stringify(contactArr));
+            location.reload(); 
+        })
+   
+
         p1.textContent = `Name: ${contact.name}`;
         p2.textContent = `Phone number: ${contact.phone}`;
         p3.textContent = `Email: ${contact.email}`;
@@ -34,16 +62,71 @@ const render = (contactArr) => {
         cardDiv.append(p2);
         cardDiv.append(p3);
         cardDiv.append(p4);
-        cardDiv.append(btn);
+        cardDiv.append(btnDel);
+        
+        if(!contact.isFavorite) {
+            const btnFav = document.createElement('button');
+            btnFav.textContent = 'Add to Favorites';
+            cardDiv.append(btnFav);
+            btnFav.addEventListener(('click'), () => {
+                contact.isFavorite = true;
+                localStorage.setItem('Contact', JSON.stringify(contactArr));
+                location.reload(); 
+            })
+        }
 
         contactList.append(cardDiv);
+
     });
 }
 render(contactArr);
 
+
+const renderFav = (contactArr) => {
+    const favoriteList = document.querySelector('#favorite-list');
+    contactArr.forEach((contact) => {
+        if(contact.isFavorite) {
+            const cardDiv = document.createElement('div');
+            cardDiv.setAttribute("class", "card");
+            const p1 = document.createElement('p');
+            const p2 = document.createElement('p');
+            const p3 = document.createElement('p');
+            const p4 = document.createElement('p');
+         
+            p1.textContent = `Name: ${contact.name}`;
+            p2.textContent = `Phone number: ${contact.phone}`;
+            p3.textContent = `Email: ${contact.email}`;
+            p4.textContent = `Home Address: ${contact.address}`;
+    
+            cardDiv.append(p1);
+            cardDiv.append(p2);
+            cardDiv.append(p3);
+            cardDiv.append(p4);
+            
+            const btnFavDel = document.createElement('button');
+            btnFavDel.textContent = 'Remove from Favorites';
+            cardDiv.append(btnFavDel);
+            btnFavDel.addEventListener(('click'), () => {
+                contact.isFavorite = false;
+                localStorage.setItem('Contact', JSON.stringify(contactArr));
+                location.reload(); 
+            })
+
+            favoriteList.append(cardDiv);
+        }
+        
+            
+        
+
+    });
+}
+renderFav(contactArr);
+
 btnDeleteAll.addEventListener(('click'), () => {
-    localStorage.removeItem('Contact');
-    location.reload(); 
+   if(confirm('Delete all the files?')){
+        localStorage.removeItem('Contact');
+        location.reload(); 
+   } 
 })
 
 
@@ -68,5 +151,6 @@ class Contact{
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.isFavorite = false;
     }
 }
