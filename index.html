@@ -27,8 +27,23 @@
         </div>
     </div>
     <div class= "card-container">
-        <div class="input-form">
+        <div class="input-form" id="create-form">
             <form id="contact-form">
+                <label for="name">Name</label>
+                <input type="text"  name="name">
+                <label for="phone">Phone Number</label>
+                <input type="tel"  name="phone">
+                <label for="email">E-mail</label>
+                <input type="email"  name="email">
+                <label for="address">Home Adress</label>
+                <input type="text"  name="address">
+                <button type="submit" id="btn-add">Add</button>
+            </form>
+        </div>
+
+        <div class="input-form" id="edit-form">
+            <form id="contact-edit">
+                <input type="hidden" id="index" name="index">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name">
                 <label for="phone">Phone Number</label>
@@ -37,30 +52,17 @@
                 <input type="email" id="email" name="email">
                 <label for="address">Home Adress</label>
                 <input type="text" id="home-address" name="address">
-                <button type="submit" id="btn-add">Add</button>
+                <button type="submit" >Edit</button>
             </form>
         </div>
 
+
         <div id="contact-list">
             <h2>Your contact list</h2>
-            <!-- <div class="card">
-                <p>Name:</p>
-                <p>Phone:</p>
-                <p>Email:</p>
-                <p>Home Adress</p>
-                <button type="submit" id="btn-delete">Del</button>
-            </div> -->
         </div>
 
         <div id="favorite-list">
             <h2>Your favourite contact list</h2>
-            <!-- <div class="card">
-                <p>Name:</p>
-                <p>Phone:</p>
-                <p>Email:</p>
-                <p>Home Adress</p>
-                <button type="submit" id="btn-delete-fav">Del</button>
-            </div> -->
         </div>
     </div>
 
