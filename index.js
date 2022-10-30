@@ -88,6 +88,7 @@ const render = (contactArr) => {
         const btnDel = document.createElement('button');
         btnDel.textContent = 'Delete';
         btnDel.value = index;
+        btnDel.style.marginRight = '5px';
         btnDel.addEventListener('click', (event) => {
             contactArr.splice(event.target.value, 1);
             localStorage.setItem('Contact', JSON.stringify(contactArr));
@@ -95,6 +96,7 @@ const render = (contactArr) => {
         })
         const btnEdit = document.createElement('button');
         btnEdit.textContent = 'Edit';
+        btnEdit.style.marginRight = '5px';
         btnEdit.addEventListener('click', (event) => {
             editFormContainer.style.display = 'block';
 

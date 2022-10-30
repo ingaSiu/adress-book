@@ -10,22 +10,21 @@
 </head>
 <body>
 <div class="wrapper">
+
     <div class="menu">
         <button type="submit" id="add-new">Create a New Contact</button>
         <button type="submit" id="clear-all">Clear all Contacts</button>
-        <!-- <button type="submit" id="clear-selected">Clear selected Contacts</button> -->
         <button type="submit" id="search-contatcs">Search Contacts</button>
-        <!-- <button type="submit" id="favorites">Add/remove from favorites</button> -->
     </div>
+
     <div class="search-input ">
         <form id="search-form">
             <input type="search" id="search" name="search">
             <button type="submit" id="btn-search">OK</button>
         </form>
-        <div class="card-container" id="search-container">
-            
-        </div>
+        <div id="search-container"></div>
     </div>
+
     <div class= "card-container">
         <div class="input-form" id="create-form">
             <form id="contact-form">
@@ -56,12 +55,11 @@
             </form>
         </div>
 
-
-        <div id="contact-list">
+        <div  class="lists" id="contact-list">
             <h2>Your contact list</h2>
         </div>
 
-        <div id="favorite-list">
+        <div class="lists" id="favorite-list">
             <h2>Your favourite contact list</h2>
         </div>
     </div>

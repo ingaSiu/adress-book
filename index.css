@@ -13,9 +13,7 @@
   text-align: center;
 }
 .wrapper .search-input {
-  border: 1px solid black;
-  height: 100px;
-  width: 200px;
+  margin-left: 250px;
   display: none;
 }
 .wrapper .search-input input {
@@ -23,6 +21,17 @@
 }
 .wrapper .search-input button {
   height: 30px;
+}
+.wrapper .search-input #search-container {
+  display: flex;
+  gap: 20px;
+}
+.wrapper .search-input #search-container .card {
+  border: 1px solid darkgreen;
+  padding: 10px;
+  margin-top: 10px;
+  width: 170px;
+  height: 150px;
 }
 .wrapper .card-container {
   display: flex;
@@ -43,4 +52,12 @@
 }
 .wrapper .card-container .card {
   border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.wrapper .card-container .card buttom {
+  padding: 5px;
 }/*# sourceMappingURL=index.css.map */

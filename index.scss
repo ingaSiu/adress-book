@@ -13,15 +13,25 @@
         }
     }
     .search-input{
-        border: 1px solid black;
-        height: 100px;
-        width: 200px;
+        margin-left: 250px;
         display: none;
         input{
             height: 50px;
         }
         button{
             height: 30px;
+        }
+        #search-container{
+            display: flex;
+            gap: 20px;
+
+            .card {
+                border: 1px solid darkgreen;
+                padding: 10px;
+                margin-top: 10px;
+                width: 170px;
+                height: 150px;
+            }
         }
     }
     .card-container{
@@ -42,6 +52,15 @@
         }
     .card{
         border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px;
+        width: 200px;
+        text-align: center;
+        margin-bottom: 10px;
+
+        buttom{
+            padding: 5px;
+        }
     }
     }
  
