@@ -75,8 +75,46 @@ const renderSearch = (searchArr) => {
     });
 }
 
+const renderFav = (contactArr) => {
+    const favoriteList = document.querySelector('#favorite-list');
+    favoriteList.innerHTML = '';
+    contactArr.forEach((contact) => {
+        if(contact.isFavorite) {
+            const cardDiv = document.createElement('div');
+            cardDiv.setAttribute("class", "card");
+            const p1 = document.createElement('p');
+            const p2 = document.createElement('p');
+            const p3 = document.createElement('p');
+            const p4 = document.createElement('p');
+         
+            p1.textContent = `Name: ${contact.name}`;
+            p2.textContent = `Phone number: ${contact.phone}`;
+            p3.textContent = `Email: ${contact.email}`;
+            p4.textContent = `Home Address: ${contact.address}`;
+    
+            cardDiv.append(p1);
+            cardDiv.append(p2);
+            cardDiv.append(p3);
+            cardDiv.append(p4);
+            
+            const btnFavDel = document.createElement('button');
+            btnFavDel.textContent = 'Remove from Favorites';
+            cardDiv.append(btnFavDel);
+            btnFavDel.addEventListener(('click'), () => {
+                contact.isFavorite = false;
+                localStorage.setItem('Contact', JSON.stringify(contactArr));
+                render(contactArr);
+            })
+
+            favoriteList.append(cardDiv);
+        }
+    });
+}
+
+
 const render = (contactArr) => {
     const contactList = document.querySelector('#contact-list');
+    contactList.innerHTML = '';
     contactArr.forEach((contact, index) => {
         const cardDiv = document.createElement('div');
         cardDiv.setAttribute("class", "card");
@@ -92,7 +130,7 @@ const render = (contactArr) => {
         btnDel.addEventListener('click', (event) => {
             contactArr.splice(event.target.value, 1);
             localStorage.setItem('Contact', JSON.stringify(contactArr));
-            location.reload(); 
+            render(contactArr); 
         })
         const btnEdit = document.createElement('button');
         btnEdit.textContent = 'Edit';
@@ -127,77 +165,47 @@ const render = (contactArr) => {
             btnFav.addEventListener(('click'), () => {
                 contact.isFavorite = true;
                 localStorage.setItem('Contact', JSON.stringify(contactArr));
-                location.reload(); 
+                render(contactArr); 
             })
         }
      
         contactList.append(cardDiv);
 
     });
+    renderFav(contactArr);
 }
 render(contactArr);
 
 
-const renderFav = (contactArr) => {
-    const favoriteList = document.querySelector('#favorite-list');
-    contactArr.forEach((contact) => {
-        if(contact.isFavorite) {
-            const cardDiv = document.createElement('div');
-            cardDiv.setAttribute("class", "card");
-            const p1 = document.createElement('p');
-            const p2 = document.createElement('p');
-            const p3 = document.createElement('p');
-            const p4 = document.createElement('p');
-         
-            p1.textContent = `Name: ${contact.name}`;
-            p2.textContent = `Phone number: ${contact.phone}`;
-            p3.textContent = `Email: ${contact.email}`;
-            p4.textContent = `Home Address: ${contact.address}`;
-    
-            cardDiv.append(p1);
-            cardDiv.append(p2);
-            cardDiv.append(p3);
-            cardDiv.append(p4);
-            
-            const btnFavDel = document.createElement('button');
-            btnFavDel.textContent = 'Remove from Favorites';
-            cardDiv.append(btnFavDel);
-            btnFavDel.addEventListener(('click'), () => {
-                contact.isFavorite = false;
-                localStorage.setItem('Contact', JSON.stringify(contactArr));
-                location.reload(); 
-            })
 
-            favoriteList.append(cardDiv);
-        }
-    });
-}
-renderFav(contactArr);
 
 btnDeleteAll.addEventListener(('click'), () => {
    if(confirm('Delete all the files?')){
         localStorage.removeItem('Contact');
-        location.reload(); 
+        render(contactArr); 
    } 
 })
 
 
 form.addEventListener('submit', (event) => {
-    
+   
     const name = event.target.elements.name.value;
     const phone = event.target.elements.phone.value;
     const email = event.target.elements.email.value;
     const address = event.target.elements.address.value;
 
-    const newContact = new Contact(name, phone, email, address);
-    contactArr.push(newContact);
-    localStorage.setItem('Contact', JSON.stringify(contactArr));
-    console.log(newContact);
-    console.log(localStorage.getItem('Contact'));
+    if(name || phone || email || address)  {
+        const newContact = new Contact(name, phone, email, address);
+        contactArr.push(newContact);
+        localStorage.setItem('Contact', JSON.stringify(contactArr));
+        console.log(newContact);
+        console.log(localStorage.getItem('Contact'));
+    }
+ 
 })
 
 formEdit.addEventListener('submit', (event) => {
-    
+    event.preventDefault();
     const index = event.target.elements.index.value;
 
     let editContact = contactArr[index];
@@ -208,7 +216,7 @@ formEdit.addEventListener('submit', (event) => {
     editContact.address = event.target.elements.address.value;
     contactArr[index] = editContact;
     localStorage.setItem('Contact', JSON.stringify(contactArr));
-
+    render(contactArr);
 })
 class Contact{
     constructor(name, phone, email, address) {
