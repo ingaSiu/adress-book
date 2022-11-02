@@ -1,68 +1,96 @@
-.wrapper{
-    background-color: rgb(166, 233, 211);
-    display: flex;
-    flex-direction: column;
-    .menu{
-        display: flex;
-        gap: 20px;
-        padding: 20px;
-      
-        button{
-            height: 30px;
-            text-align: center;
-        }
+body {
+    background: rgb(188,162,211);
+background: linear-gradient(90deg, rgba(188,162,211,1) 17%, rgba(198,180,216,1) 61%);
+    font-family: 'Syne Mono', monospace;
+    button{
+        background-color: #d3bca2;
+        height: 30px;
+        text-align: center;
+        font-family: 'Syne Mono', monospace;
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+        
     }
-    .search-input{
-        margin-left: 250px;
-        display: none;
-        input{
-            height: 50px;
-        }
-        button{
-            height: 30px;
-        }
-        #search-container{
+    button:hover {
+        background-color: #a2d3bc;
+        border: 1px solid black;
+    }
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        .menu{
             display: flex;
             gap: 20px;
-
-            .card {
-                border: 1px solid darkgreen;
-                padding: 10px;
-                margin-top: 10px;
-                width: 200px;
-                height: 150px;
-            }
+            padding: 20px;
         }
-    }
-    .card-container{
-        display: flex;
-        justify-content: space-evenly;
-        .input-form{
-            border: 1px solid violet;
-            width: 15%;
-            height: 250px;
-            border-radius: 5px;
+        .search-input{
+            margin-left: 250px;
             display: none;
-            form{
+            input{
+                height: 50px;
+                margin-bottom: 10px;
+                border: none;
+                border-radius: 5px;
+                background-color: aliceblue;
+                font-family: 'Syne Mono', monospace;
+                
+            }
+            button:hover {
+                background-color: #a2d3bc;
+            }
+            #search-container{
                 display: flex;
-                flex-direction: column;
-                gap: 5px;
-                padding: 10px;
+                flex-wrap: wrap;
+                gap: 20px;
+    
+                .card {
+                    background-color: #a2d3bc;
+                    border-radius: 10px;
+                    padding: 10px;
+                    width: 250px;
+                    height: 150px;
+                }
             }
         }
-    .card{
-        border: 1px solid black;
-        border-radius: 5px;
-        padding: 10px;
-        width: 220px;
-        text-align: center;
-        margin-bottom: 10px;
+        .card-container{
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+          
+            input{
+                font-family: 'Syne Mono', monospace;   
+            }
 
-        buttom{
-            padding: 5px;
+            .input-form{
+                
+                width: 15%;
+                height: 250px;
+                border-radius: 5px;
+                display: none;
+                form{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+                    padding: 10px;
+                    background-color: #a2d3bc;
+                    border-radius: 5px;
+                }
+            }
+           
+            .card{
+                background-color: #a2d3bc;
+                border-radius: 5px;
+                padding: 10px;
+                width: 300px;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+           
         }
+     
+    
     }
-    }
- 
-
 }

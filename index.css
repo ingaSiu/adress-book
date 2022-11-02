@@ -1,63 +1,86 @@
-.wrapper {
-  background-color: rgb(166, 233, 211);
+body {
+  background: rgb(188, 162, 211);
+  background: linear-gradient(90deg, rgb(188, 162, 211) 17%, rgb(198, 180, 216) 61%);
+  font-family: "Syne Mono", monospace;
+}
+body button {
+  background-color: #d3bca2;
+  height: 30px;
+  text-align: center;
+  font-family: "Syne Mono", monospace;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+body button:hover {
+  background-color: #a2d3bc;
+  border: 1px solid black;
+}
+body .wrapper {
   display: flex;
   flex-direction: column;
 }
-.wrapper .menu {
+body .wrapper .menu {
   display: flex;
   gap: 20px;
   padding: 20px;
 }
-.wrapper .menu button {
-  height: 30px;
-  text-align: center;
-}
-.wrapper .search-input {
+body .wrapper .search-input {
   margin-left: 250px;
   display: none;
 }
-.wrapper .search-input input {
+body .wrapper .search-input input {
   height: 50px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: aliceblue;
+  font-family: "Syne Mono", monospace;
 }
-.wrapper .search-input button {
-  height: 30px;
+body .wrapper .search-input button:hover {
+  background-color: #a2d3bc;
 }
-.wrapper .search-input #search-container {
+body .wrapper .search-input #search-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
-.wrapper .search-input #search-container .card {
-  border: 1px solid darkgreen;
+body .wrapper .search-input #search-container .card {
+  background-color: #a2d3bc;
+  border-radius: 10px;
   padding: 10px;
-  margin-top: 10px;
-  width: 200px;
+  width: 250px;
   height: 150px;
 }
-.wrapper .card-container {
+body .wrapper .card-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  text-align: center;
 }
-.wrapper .card-container .input-form {
-  border: 1px solid violet;
+body .wrapper .card-container input {
+  font-family: "Syne Mono", monospace;
+}
+body .wrapper .card-container .input-form {
   width: 15%;
   height: 250px;
   border-radius: 5px;
   display: none;
 }
-.wrapper .card-container .input-form form {
+body .wrapper .card-container .input-form form {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 15px;
   padding: 10px;
+  background-color: #a2d3bc;
+  border-radius: 5px;
 }
-.wrapper .card-container .card {
-  border: 1px solid black;
+body .wrapper .card-container .card {
+  background-color: #a2d3bc;
   border-radius: 5px;
   padding: 10px;
-  width: 220px;
+  width: 300px;
   text-align: center;
   margin-bottom: 10px;
-}
-.wrapper .card-container .card buttom {
-  padding: 5px;
 }/*# sourceMappingURL=index.css.map */

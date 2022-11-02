@@ -6,6 +6,7 @@ const btnSearch = document.querySelector('#search-contatcs');
 const searchBox = document.querySelector('.search-input');
 const searchForm = document.querySelector('#search-form');
 const searchContainer = document.querySelector('#search-container');
+const btnSort = document.querySelector('#sort-contacts');
 const formEdit = document.querySelector('#contact-edit');
 const editFormContainer = document.querySelector('#edit-form');
 
@@ -18,7 +19,6 @@ if(localStorage.getItem('Contact')) {
 
 btnNew.addEventListener(('click'), () => {
     inputForm.style.display = 'block';
-
 })
 
 
@@ -45,33 +45,50 @@ searchForm.addEventListener(('submit'), (event) => {
             }
         }); 
     }
- 
     console.log(searchArr);
     renderSearch(searchArr);
 })
 
+const sortArr = (a,b) => {
+    if (a.name < b.name) {
+        return -1;
+    }
+    if (a.name > b.name) {
+        return 1;
+    }
+    return 0;
+}
+
+btnSort.addEventListener(('click'), () => {
+    contactArr.sort(sortArr);
+    render(contactArr);
+})
+
+const renderCard = (contact) => {
+    const cardDiv = document.createElement('div');
+    cardDiv.setAttribute("class", "card");
+    const p1 = document.createElement('p');
+    const p2 = document.createElement('p');
+    const p3 = document.createElement('p');
+    const p4 = document.createElement('p');
+
+    p1.textContent = `Name: ${contact.name}`;
+    p2.textContent = `Phone number: ${contact.phone}`;
+    p3.textContent = `Email: ${contact.email}`;
+    p4.textContent = `Home Address: ${contact.address}`;
+
+    cardDiv.append(p1);
+    cardDiv.append(p2);
+    cardDiv.append(p3);
+    cardDiv.append(p4);
+
+    return cardDiv;
+}
+
 const renderSearch = (searchArr) => {
     searchContainer.innerHTML = '';
     searchArr.forEach((contact) => {
-        const cardDiv = document.createElement('div');
-        cardDiv.setAttribute("class", "card");
-        const p1 = document.createElement('p');
-        const p2 = document.createElement('p');
-        const p3 = document.createElement('p');
-        const p4 = document.createElement('p');
-    
-        p1.textContent = `Name: ${contact.name}`;
-        p2.textContent = `Phone number: ${contact.phone}`;
-        p3.textContent = `Email: ${contact.email}`;
-        p4.textContent = `Home Address: ${contact.address}`;
-
-        cardDiv.append(p1);
-        cardDiv.append(p2);
-        cardDiv.append(p3);
-        cardDiv.append(p4);
-        
-        searchContainer.append(cardDiv);
-
+        searchContainer.append(renderCard(contact));
     });
 }
 
@@ -80,33 +97,17 @@ const renderFav = (contactArr) => {
     favoriteList.innerHTML = '';
     contactArr.forEach((contact) => {
         if(contact.isFavorite) {
-            const cardDiv = document.createElement('div');
-            cardDiv.setAttribute("class", "card");
-            const p1 = document.createElement('p');
-            const p2 = document.createElement('p');
-            const p3 = document.createElement('p');
-            const p4 = document.createElement('p');
-         
-            p1.textContent = `Name: ${contact.name}`;
-            p2.textContent = `Phone number: ${contact.phone}`;
-            p3.textContent = `Email: ${contact.email}`;
-            p4.textContent = `Home Address: ${contact.address}`;
-    
-            cardDiv.append(p1);
-            cardDiv.append(p2);
-            cardDiv.append(p3);
-            cardDiv.append(p4);
-            
+            const newCard = renderCard(contact);
+
             const btnFavDel = document.createElement('button');
             btnFavDel.textContent = 'Remove from Favorites';
-            cardDiv.append(btnFavDel);
+            newCard.append(btnFavDel);
             btnFavDel.addEventListener(('click'), () => {
                 contact.isFavorite = false;
                 localStorage.setItem('Contact', JSON.stringify(contactArr));
                 render(contactArr);
             })
-
-            favoriteList.append(cardDiv);
+            favoriteList.append(newCard);
         }
     });
 }
@@ -116,17 +117,11 @@ const render = (contactArr) => {
     const contactList = document.querySelector('#contact-list');
     contactList.innerHTML = '';
     contactArr.forEach((contact, index) => {
-        const cardDiv = document.createElement('div');
-        cardDiv.setAttribute("class", "card");
-        const p1 = document.createElement('p');
-        const p2 = document.createElement('p');
-        const p3 = document.createElement('p');
-        const p4 = document.createElement('p');
+        const newCard = renderCard(contact);
 
         const btnDel = document.createElement('button');
         btnDel.textContent = 'Delete';
         btnDel.value = index;
-        btnDel.style.marginRight = '5px';
         btnDel.addEventListener('click', (event) => {
             contactArr.splice(event.target.value, 1);
             localStorage.setItem('Contact', JSON.stringify(contactArr));
@@ -134,8 +129,7 @@ const render = (contactArr) => {
         })
         const btnEdit = document.createElement('button');
         btnEdit.textContent = 'Edit';
-        btnEdit.style.marginRight = '5px';
-        btnEdit.addEventListener('click', (event) => {
+        btnEdit.addEventListener('click', () => {
             editFormContainer.style.display = 'block';
 
             document.querySelector('#name').value = contact.name;
@@ -144,40 +138,25 @@ const render = (contactArr) => {
             document.querySelector('#home-address').value = contact.address;
             document.querySelector('#index').value = index;
         });
-          
-        
-        p1.textContent = `Name: ${contact.name}`;
-        p2.textContent = `Phone number: ${contact.phone}`;
-        p3.textContent = `Email: ${contact.email}`;
-        p4.textContent = `Home Address: ${contact.address}`;
-
-        cardDiv.append(p1);
-        cardDiv.append(p2);
-        cardDiv.append(p3);
-        cardDiv.append(p4);
-        cardDiv.append(btnDel);
-        cardDiv.append(btnEdit);
+ 
+        newCard.append(btnDel);
+        newCard.append(btnEdit);
         
         if(!contact.isFavorite) {
             const btnFav = document.createElement('button');
             btnFav.textContent = 'Add to Favorites';
-            cardDiv.append(btnFav);
+            newCard.append(btnFav);
             btnFav.addEventListener(('click'), () => {
                 contact.isFavorite = true;
                 localStorage.setItem('Contact', JSON.stringify(contactArr));
                 render(contactArr); 
             })
         }
-     
-        contactList.append(cardDiv);
-
+        contactList.append(newCard);
     });
     renderFav(contactArr);
 }
 render(contactArr);
-
-
-
 
 btnDeleteAll.addEventListener(('click'), () => {
    if(confirm('Delete all the files?')){
@@ -185,7 +164,6 @@ btnDeleteAll.addEventListener(('click'), () => {
         render(contactArr); 
    } 
 })
-
 
 form.addEventListener('submit', (event) => {
    
@@ -201,7 +179,7 @@ form.addEventListener('submit', (event) => {
         console.log(newContact);
         console.log(localStorage.getItem('Contact'));
     }
- 
+    form.style.display = 'none';
 })
 
 formEdit.addEventListener('submit', (event) => {
@@ -217,7 +195,9 @@ formEdit.addEventListener('submit', (event) => {
     contactArr[index] = editContact;
     localStorage.setItem('Contact', JSON.stringify(contactArr));
     render(contactArr);
+    editFormContainer.style.display = 'none';
 })
+
 class Contact{
     constructor(name, phone, email, address) {
         this.name = name;
